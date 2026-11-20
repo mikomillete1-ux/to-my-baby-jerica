@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Hindi lalabas sa Google / search engines -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#e8647c">
+  <title>Para kay Baby ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN (walang build step) -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            script: ['"Great Vibes"', 'cursive'],
+            sans: ['Poppins', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            cream: '#fff7f3',
+            blush: '#ffe4e8',
+            brown: '#4a2c2a',
+            heart: { DEFAULT: '#e8647c', dark: '#c94763' }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Scroll-reveal: nakatago muna, lalabas kapag nakita na sa screen */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Kumikislap na cursor habang nagta-type */
+    .caret::after { content: "|"; margin-left: 2px; color: #e8647c; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Para sa mga ayaw ng maraming galaw */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .caret::after { animation: none; }
+    }
+  </style>
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+
+<body class="bg-cream font-sans text-brown antialiased">
+
+  <!-- 1. HERO -->
+  <header id="hero"
+          class="relative flex min-h-[100svh] items-center justify-center bg-cover bg-center text-center text-white"
+          style="background-image: url('photo1.jpg');">
+    <div class="absolute inset-0 bg-black/55" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-xl px-6 py-16">
+      <h1 id="hero-heading" class="font-script text-6xl leading-tight sm:text-7xl md:text-8xl"></h1>
+      <p id="hero-sub" class="mt-6 text-lg font-light sm:text-xl"></p>
+      <a id="hero-btn" href="#letter"
+         class="mt-10 inline-block rounded-full bg-heart px-8 py-4 font-medium text-white shadow-lg transition hover:bg-heart-dark focus:outline-none focus-visible:ring-4 focus-visible:ring-white/70"></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. LETTER -->
+    <section id="letter" aria-labelledby="letter-title" class="px-4 py-20 sm:py-28">
+      <div class="mx-auto max-w-2xl">
+        <div class="reveal rounded-3xl bg-white p-6 shadow-xl ring-1 ring-heart/10 sm:p-10">
+          <div class="flex items-start justify-between gap-4">
+            <h2 id="letter-title" class="font-script text-4xl text-heart sm:text-5xl"></h2>
+            <button id="skip-btn" type="button"
+                    class="shrink-0 rounded-full border border-heart/40 px-3 py-1 text-xs text-heart transition hover:bg-heart/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-heart">
+              Skip animation
+            </button>
+          </div>
+          <div id="letter-body" class="mt-6 space-y-8 text-base leading-relaxed sm:text-lg" aria-busy="false"></div>
+          <p id="letter-sign" class="mt-10 text-right font-script text-3xl text-heart"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MEMORIES -->
+    <section id="memories" aria-labelledby="memories-title" class="bg-blush/60 px-4 py-20">
+      <div class="mx-auto max-w-5xl">
+        <h2 id="memories-title" class="reveal text-center font-script text-4xl text-heart sm:text-5xl"></h2>
+        <p id="memories-sub" class="reveal mt-3 text-center text-brown/70"></p>
+        <ul id="gallery" class="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4"></ul>
+      </div>
+    </section>
+
+    <!-- 4. CLOSING -->
+    <section id="closing" class="px-6 py-24 text-center">
+      <div class="reveal mx-auto max-w-xl">
+        <p class="text-5xl" aria-hidden="true">❤️</p>
+        <p id="closing-line" class="mt-6 font-script text-3xl leading-snug text-heart sm:text-4xl"></p>
+        <p id="closing-note" class="mt-6 text-brown/70"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Music toggle (lalabas lang kung may musicSrc sa config) -->
+  <button id="music-btn" type="button" hidden aria-pressed="false" aria-label="I-play ang music"
+          class="fixed bottom-4 right-4 z-30 h-12 w-12 rounded-full bg-heart text-xl text-white shadow-lg transition hover:bg-heart-dark focus:outline-none focus-visible:ring-4 focus-visible:ring-heart/40">♪</button>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/90 p-4"
+       role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="lb-close" type="button" aria-label="Isara"
+            class="absolute right-4 top-4 h-11 w-11 rounded-full bg-white/15 text-2xl text-white hover:bg-white/25 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60">×</button>
+    <button id="lb-prev" type="button" aria-label="Nakaraang larawan"
+            class="absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full bg-white/15 text-2xl text-white hover:bg-white/25 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60">‹</button>
+    <button id="lb-next" type="button" aria-label="Susunod na larawan"
+            class="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full bg-white/15 text-2xl text-white hover:bg-white/25 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60">›</button>
+    <img id="lb-img" src="" alt="" class="max-h-[88vh] max-w-full rounded-xl object-contain shadow-2xl">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
